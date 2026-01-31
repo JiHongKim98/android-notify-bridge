@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.KakaoDiscord" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="colorPrimary">#5865F2</item>
-        <item name="colorPrimaryVariant">#4752C4</item>
-        <item name="colorOnPrimary">@android:color/white</item>
-        <item name="colorSecondary">#FEE75C</item>
-        <item name="colorSecondaryVariant">#E5CF00</item>
-        <item name="colorOnSecondary">@android:color/black</item>
-    </style>
+    <style name="Theme.NotifyBridge" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>

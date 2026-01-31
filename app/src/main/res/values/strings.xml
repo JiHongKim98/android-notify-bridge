@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">KakaoDiscord</string>
+    <string name="app_name">Notify Bridge</string>
     <string name="hint_webhook_url">Discord Webhook URL</string>
     <string name="hint_room_name">채팅방 이름</string>
     <string name="hint_sender_name">발신자 이름</string>

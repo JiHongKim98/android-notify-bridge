@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "KakaoDiscord"
+rootProject.name = "NotifyBridge"
 include(":app")
