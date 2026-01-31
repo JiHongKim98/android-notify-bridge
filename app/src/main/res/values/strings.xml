@@ -1,13 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Notify Bridge</string>
-    <string name="hint_webhook_url">Discord Webhook URL</string>
-    <string name="hint_room_name">채팅방 이름</string>
-    <string name="hint_sender_name">발신자 이름</string>
-    <string name="btn_save">설정 저장</string>
-    <string name="btn_permission">알림 접근 권한 허용</string>
+    
+    <!-- Permission -->
+    <string name="btn_permission">권한 허용</string>
     <string name="status_permission_granted">알림 접근 권한: 허용됨</string>
     <string name="status_permission_denied">알림 접근 권한: 거부됨</string>
-    <string name="toast_saved">설정이 저장되었습니다</string>
-    <string name="toast_fill_all">모든 필드를 입력해주세요</string>
+    
+    <!-- Rule List -->
+    <string name="no_rules">등록된 규칙이 없습니다.\n+ 버튼을 눌러 새 규칙을 추가하세요.</string>
+    <string name="keyword_label">내용: %1$s</string>
+    <string name="sender_label">발신자: %1$s</string>
+    <string name="room_label">채팅방: %1$s</string>
+    
+    <!-- Rule Edit -->
+    <string name="add_rule">규칙 추가</string>
+    <string name="edit_rule">규칙 편집</string>
+    <string name="target_app">대상 앱</string>
+    <string name="select_app">앱 선택</string>
+    <string name="tap_to_select_app">탭하여 앱을 선택하세요</string>
+    <string name="search_app">앱 검색</string>
+    
+    <!-- Filters -->
+    <string name="filter_section">필터 조건 (선택)</string>
+    <string name="hint_room_keyword">채팅방 이름</string>
+    <string name="room_keyword_help">그룹 채팅방 이름에 이 키워드가 포함되면 전송됩니다.</string>
+    <string name="hint_sender_keyword">발신자 이름</string>
+    <string name="sender_keyword_help">발신자 이름에 이 키워드가 포함되면 전송됩니다.</string>
+    <string name="hint_keyword">메시지 내용</string>
+    <string name="keyword_help">메시지 내용에 이 키워드가 포함되면 전송됩니다.</string>
+    <string name="filter_empty_note">모든 필터가 비어있으면 해당 앱의 모든 알림이 전송됩니다.</string>
+    
+    <string name="hint_webhook_url">Discord Webhook URL</string>
+    <string name="btn_save">저장</string>
+    <string name="btn_cancel">취소</string>
+    
+    <!-- App Picker -->
+    <string name="manual_input">직접 입력</string>
+    <string name="manual_package_input">패키지명 직접 입력</string>
+    <string name="hint_package_name">패키지명 (예: com.kakao.talk)</string>
+    <string name="hint_app_name">앱 이름 (표시용)</string>
+    <string name="btn_confirm">확인</string>
+    <string name="error_empty_package">패키지명을 입력해주세요</string>
+    <string name="error_empty_app_name">앱 이름을 입력해주세요</string>
+    
+    <!-- Errors -->
+    <string name="error_select_app">앱을 선택해주세요</string>
+    <string name="error_enter_webhook">Webhook URL을 입력해주세요</string>
+    <string name="error_invalid_webhook">올바른 Webhook URL을 입력해주세요 (https://로 시작)</string>
+    
+    <!-- Toast -->
+    <string name="toast_saved">저장되었습니다</string>
 </resources>
