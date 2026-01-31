@@ -1,14 +1,16 @@
-package com.example.kakaodiscord.data
+package com.example.notifybridge.data
 
 import android.content.Context
 import android.content.SharedPreferences
 
-class RuleRepository(context: Context) {
-
-    private val prefs: SharedPreferences = context.getSharedPreferences(
-        PREF_NAME,
-        Context.MODE_PRIVATE,
-    )
+class RuleRepository(
+    context: Context,
+) {
+    private val prefs: SharedPreferences =
+        context.getSharedPreferences(
+            PREF_NAME,
+            Context.MODE_PRIVATE,
+        )
 
     fun getRules(): List<NotificationRule> {
         val json = prefs.getString(KEY_RULES, "") ?: ""
@@ -16,7 +18,8 @@ class RuleRepository(context: Context) {
     }
 
     fun saveRules(rules: List<NotificationRule>) {
-        prefs.edit()
+        prefs
+            .edit()
             .putString(KEY_RULES, NotificationRule.listToJson(rules))
             .apply()
     }
@@ -41,9 +44,7 @@ class RuleRepository(context: Context) {
         saveRules(rules)
     }
 
-    fun getEnabledRules(): List<NotificationRule> {
-        return getRules().filter { it.isEnabled }
-    }
+    fun getEnabledRules(): List<NotificationRule> = getRules().filter { it.isEnabled }
 
     companion object {
         private const val PREF_NAME = "notification_rules"

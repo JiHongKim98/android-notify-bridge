@@ -1,4 +1,4 @@
-package com.example.kakaodiscord.ui.screen
+package com.example.notifybridge.ui.screen
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
@@ -31,7 +31,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.kakaodiscord.R
+import com.example.notifybridge.R
 
 data class AppSelection(
     val packageName: String,
@@ -72,28 +72,29 @@ private fun AppListDialog(
 
     var searchQuery by remember { mutableStateOf("") }
 
-    val installedApps = remember {
-        packageManager
-            .getInstalledApplications(PackageManager.GET_META_DATA)
-            .filter { appInfo ->
-                // Show apps that are not pure system apps (user-installed or updated system apps)
-                (appInfo.flags and ApplicationInfo.FLAG_SYSTEM == 0) ||
-                    (appInfo.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP != 0)
-            }
-            .sortedBy { packageManager.getApplicationLabel(it).toString().lowercase() }
-    }
+    val installedApps =
+        remember {
+            packageManager
+                .getInstalledApplications(PackageManager.GET_META_DATA)
+                .filter { appInfo ->
+                    // Show apps that are not pure system apps (user-installed or updated system apps)
+                    (appInfo.flags and ApplicationInfo.FLAG_SYSTEM == 0) ||
+                        (appInfo.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP != 0)
+                }.sortedBy { packageManager.getApplicationLabel(it).toString().lowercase() }
+        }
 
-    val filteredApps = remember(searchQuery) {
-        if (searchQuery.isEmpty()) {
-            installedApps
-        } else {
-            installedApps.filter { appInfo ->
-                val appName = packageManager.getApplicationLabel(appInfo).toString()
-                appName.contains(searchQuery, ignoreCase = true) ||
-                    appInfo.packageName.contains(searchQuery, ignoreCase = true)
+    val filteredApps =
+        remember(searchQuery) {
+            if (searchQuery.isEmpty()) {
+                installedApps
+            } else {
+                installedApps.filter { appInfo ->
+                    val appName = packageManager.getApplicationLabel(appInfo).toString()
+                    appName.contains(searchQuery, ignoreCase = true) ||
+                        appInfo.packageName.contains(searchQuery, ignoreCase = true)
+                }
             }
         }
-    }
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -164,7 +165,7 @@ private fun ManualPackageInputDialog(
             Column {
                 OutlinedTextField(
                     value = packageName,
-                    onValueChange = { 
+                    onValueChange = {
                         packageName = it
                         errorMessage = null
                     },
@@ -177,7 +178,7 @@ private fun ManualPackageInputDialog(
 
                 OutlinedTextField(
                     value = appName,
-                    onValueChange = { 
+                    onValueChange = {
                         appName = it
                         errorMessage = null
                     },
@@ -232,10 +233,11 @@ private fun AppItem(
     val appName = remember { packageManager.getApplicationLabel(appInfo).toString() }
 
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick)
-            .padding(vertical = 12.dp, horizontal = 4.dp),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .clickable(onClick = onClick)
+                .padding(vertical = 12.dp, horizontal = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(

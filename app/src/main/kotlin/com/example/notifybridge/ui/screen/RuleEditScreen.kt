@@ -1,4 +1,4 @@
-package com.example.kakaodiscord.ui.screen
+package com.example.notifybridge.ui.screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -33,9 +33,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.kakaodiscord.R
-import com.example.kakaodiscord.data.NotificationRule
-import com.example.kakaodiscord.data.RuleRepository
+import com.example.notifybridge.R
+import com.example.notifybridge.data.NotificationRule
+import com.example.notifybridge.data.RuleRepository
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -72,36 +72,40 @@ fun RuleEditScreen(
                         )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = Color.White,
-                ),
+                colors =
+                    TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        titleContentColor = Color.White,
+                    ),
             )
         },
     ) { paddingValues ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(16.dp)
-                .verticalScroll(rememberScrollState()),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .padding(16.dp)
+                    .verticalScroll(rememberScrollState()),
         ) {
             // App Selector
             OutlinedTextField(
-                value = if (selectedAppName.isNotEmpty()) {
-                    "$selectedAppName\n$selectedAppPackage"
-                } else {
-                    ""
-                },
+                value =
+                    if (selectedAppName.isNotEmpty()) {
+                        "$selectedAppName\n$selectedAppPackage"
+                    } else {
+                        ""
+                    },
                 onValueChange = {},
                 label = { Text(stringResource(R.string.target_app)) },
                 placeholder = { Text(stringResource(R.string.select_app)) },
                 readOnly = true,
                 enabled = false,
                 minLines = 2,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { showAppPicker = true },
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .clickable { showAppPicker = true },
             )
 
             Spacer(modifier = Modifier.height(4.dp))
@@ -110,10 +114,11 @@ fun RuleEditScreen(
                 text = stringResource(R.string.tap_to_select_app),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { showAppPicker = true }
-                    .padding(vertical = 8.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .clickable { showAppPicker = true }
+                        .padding(vertical = 8.dp),
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -132,7 +137,7 @@ fun RuleEditScreen(
             // Room Keyword Input (Optional)
             OutlinedTextField(
                 value = roomKeyword,
-                onValueChange = { 
+                onValueChange = {
                     roomKeyword = it
                     errorMessage = null
                 },
@@ -151,7 +156,7 @@ fun RuleEditScreen(
             // Sender Keyword Input (Optional)
             OutlinedTextField(
                 value = senderKeyword,
-                onValueChange = { 
+                onValueChange = {
                     senderKeyword = it
                     errorMessage = null
                 },
@@ -170,7 +175,7 @@ fun RuleEditScreen(
             // Content Keyword Input (Optional)
             OutlinedTextField(
                 value = keyword,
-                onValueChange = { 
+                onValueChange = {
                     keyword = it
                     errorMessage = null
                 },
@@ -200,7 +205,7 @@ fun RuleEditScreen(
             // Webhook URL Input
             OutlinedTextField(
                 value = webhookUrl,
-                onValueChange = { 
+                onValueChange = {
                     webhookUrl = it
                     errorMessage = null
                 },
@@ -235,16 +240,20 @@ fun RuleEditScreen(
                             errorMessage = context.getString(R.string.error_invalid_webhook)
                         }
                         else -> {
-                            val rule = NotificationRule(
-                                id = existingRule?.id ?: java.util.UUID.randomUUID().toString(),
-                                appPackage = selectedAppPackage,
-                                appName = selectedAppName,
-                                keyword = keyword.trim(),
-                                senderKeyword = senderKeyword.trim(),
-                                roomKeyword = roomKeyword.trim(),
-                                webhookUrl = webhookUrl.trim(),
-                                isEnabled = existingRule?.isEnabled ?: true,
-                            )
+                            val rule =
+                                NotificationRule(
+                                    id =
+                                        existingRule?.id ?: java.util.UUID
+                                            .randomUUID()
+                                            .toString(),
+                                    appPackage = selectedAppPackage,
+                                    appName = selectedAppName,
+                                    keyword = keyword.trim(),
+                                    senderKeyword = senderKeyword.trim(),
+                                    roomKeyword = roomKeyword.trim(),
+                                    webhookUrl = webhookUrl.trim(),
+                                    isEnabled = existingRule?.isEnabled ?: true,
+                                )
                             if (isEditMode) {
                                 repository.updateRule(rule)
                             } else {

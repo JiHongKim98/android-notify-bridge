@@ -1,4 +1,4 @@
-package com.example.kakaodiscord
+package com.example.notifybridge
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,10 +12,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.example.kakaodiscord.data.NotificationRule
-import com.example.kakaodiscord.ui.screen.RuleEditScreen
-import com.example.kakaodiscord.ui.screen.RuleListScreen
-import com.example.kakaodiscord.ui.theme.NotifyBridgeTheme
+import com.example.notifybridge.data.NotificationRule
+import com.example.notifybridge.ui.screen.RuleEditScreen
+import com.example.notifybridge.ui.screen.RuleListScreen
+import com.example.notifybridge.ui.theme.NotifyBridgeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

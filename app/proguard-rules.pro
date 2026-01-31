@@ -1,2 +1,2 @@
-# KakaoDiscord ProGuard Rules
+# NotifyBridge ProGuard Rules
 -keepattributes *Annotation*

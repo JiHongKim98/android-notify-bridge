@@ -1,4 +1,4 @@
-package com.example.kakaodiscord.ui.screen
+package com.example.notifybridge.ui.screen
 
 import android.content.ComponentName
 import android.content.Context
@@ -50,12 +50,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import com.example.kakaodiscord.NotificationListenerService
-import com.example.kakaodiscord.R
-import com.example.kakaodiscord.data.NotificationRule
-import com.example.kakaodiscord.data.RuleRepository
-import com.example.kakaodiscord.ui.theme.DiscordGreen
-import com.example.kakaodiscord.ui.theme.DiscordRed
+import com.example.notifybridge.NotificationListenerService
+import com.example.notifybridge.R
+import com.example.notifybridge.data.NotificationRule
+import com.example.notifybridge.data.RuleRepository
+import com.example.notifybridge.ui.theme.DiscordGreen
+import com.example.notifybridge.ui.theme.DiscordRed
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -71,12 +71,13 @@ fun RuleListScreen(
     val lifecycleOwner = LocalLifecycleOwner.current
 
     DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_RESUME) {
-                isPermissionGranted = checkNotificationListenerEnabled(context)
-                rules = repository.getRules()
+        val observer =
+            LifecycleEventObserver { _, event ->
+                if (event == Lifecycle.Event.ON_RESUME) {
+                    isPermissionGranted = checkNotificationListenerEnabled(context)
+                    rules = repository.getRules()
+                }
             }
-        }
         lifecycleOwner.lifecycle.addObserver(observer)
         onDispose {
             lifecycleOwner.lifecycle.removeObserver(observer)
@@ -87,10 +88,11 @@ fun RuleListScreen(
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(R.string.app_name)) },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = Color.White,
-                ),
+                colors =
+                    TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        titleContentColor = Color.White,
+                    ),
             )
         },
         floatingActionButton = {
@@ -103,10 +105,11 @@ fun RuleListScreen(
         },
     ) { paddingValues ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(16.dp),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .padding(16.dp),
         ) {
             // Permission Status Card
             PermissionStatusCard(
@@ -162,22 +165,28 @@ private fun PermissionStatusCard(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isGranted) DiscordGreen else DiscordRed,
-        ),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = if (isGranted) DiscordGreen else DiscordRed,
+            ),
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = stringResource(
-                    if (isGranted) R.string.status_permission_granted
-                    else R.string.status_permission_denied
-                ),
+                text =
+                    stringResource(
+                        if (isGranted) {
+                            R.string.status_permission_granted
+                        } else {
+                            R.string.status_permission_denied
+                        },
+                    ),
                 color = Color.White,
                 fontWeight = FontWeight.Medium,
             )
@@ -201,14 +210,16 @@ private fun RuleCard(
     Card(
         onClick = onClick,
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        ),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+            ),
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -276,9 +287,10 @@ private fun RuleCard(
 
 private fun checkNotificationListenerEnabled(context: Context): Boolean {
     val componentName = ComponentName(context, NotificationListenerService::class.java)
-    val enabledListeners = Settings.Secure.getString(
-        context.contentResolver,
-        "enabled_notification_listeners"
-    ) ?: return false
+    val enabledListeners =
+        Settings.Secure.getString(
+            context.contentResolver,
+            "enabled_notification_listeners",
+        ) ?: return false
     return enabledListeners.contains(componentName.flattenToString())
 }

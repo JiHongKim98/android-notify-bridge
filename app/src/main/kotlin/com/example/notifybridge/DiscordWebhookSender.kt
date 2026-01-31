@@ -1,4 +1,4 @@
-package com.example.kakaodiscord
+package com.example.notifybridge
 
 import android.util.Log
 import org.json.JSONObject

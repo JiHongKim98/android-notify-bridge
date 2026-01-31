@@ -1,4 +1,4 @@
-package com.example.kakaodiscord.ui.theme
+package com.example.notifybridge.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

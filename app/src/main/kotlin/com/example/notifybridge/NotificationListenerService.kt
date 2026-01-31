@@ -1,14 +1,13 @@
-package com.example.kakaodiscord
+package com.example.notifybridge
 
 import android.app.Notification
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Log
-import com.example.kakaodiscord.data.NotificationRule
-import com.example.kakaodiscord.data.RuleRepository
+import com.example.notifybridge.data.NotificationRule
+import com.example.notifybridge.data.RuleRepository
 
 class NotificationListenerService : NotificationListenerService() {
-
     private val notificationCache = NotificationCache()
 
     companion object {
@@ -43,11 +42,11 @@ class NotificationListenerService : NotificationListenerService() {
 
         // Sender is typically in the title
         val sender = title
-        
+
         // Room/chat name is typically in subText (for group chats)
         // For 1:1 chats, subText is usually empty
         val room = subText
-        
+
         // Full content for keyword matching
         val fullContent = "$title $text $subText $bigText"
 
@@ -84,14 +83,20 @@ class NotificationListenerService : NotificationListenerService() {
         }
     }
 
-    private fun matchesFilter(content: String, keyword: String): Boolean {
-        return content.contains(keyword, ignoreCase = true)
-    }
+    private fun matchesFilter(
+        content: String,
+        keyword: String,
+    ): Boolean = content.contains(keyword, ignoreCase = true)
 
-    private fun sendToDiscord(rule: NotificationRule, sender: String, room: String, message: String) {
+    private fun sendToDiscord(
+        rule: NotificationRule,
+        sender: String,
+        room: String,
+        message: String,
+    ) {
         val displaySender = sender.ifEmpty { rule.appName }
         val displayRoom = room.ifEmpty { rule.appName }
-        
+
         DiscordWebhookSender.send(
             webhookUrl = rule.webhookUrl,
             roomName = displayRoom,

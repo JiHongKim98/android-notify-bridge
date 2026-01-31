@@ -1,9 +1,10 @@
-package com.example.kakaodiscord
+package com.example.notifybridge
 
 import android.util.LruCache
 
-class NotificationCache(maxSize: Int = 50) {
-
+class NotificationCache(
+    maxSize: Int = 50,
+) {
     private val cache = LruCache<String, Long>(maxSize)
     private val ttlMillis = 5000L // 5초 TTL
 
@@ -31,8 +32,10 @@ class NotificationCache(maxSize: Int = 50) {
     }
 
     companion object {
-        fun createKey(roomName: String, sender: String, message: String): String {
-            return "$roomName|$sender|$message"
-        }
+        fun createKey(
+            roomName: String,
+            sender: String,
+            message: String,
+        ): String = "$roomName|$sender|$message"
     }
 }
